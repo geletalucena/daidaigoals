@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
   <style>
  
     /* ==========================================================================
-       1. 全局初始化与变量定义 (Reset & Variables)
+       1. Reset & Variables
        ========================================================================== */
     :root {
       --primary-color: #FF5A1F;
@@ -43,7 +43,7 @@
     }
 
     /* ==========================================================================
-       2. 导航栏 (Header & Navigation) - 固顶并带滚动高亮
+       2. Header & Navigation - Fixed with Scroll Highlight
        ========================================================================== */
     .site-header {
       position: fixed;
@@ -93,7 +93,7 @@
       transition: var(--transition);
     }
 
-    /* 滚动激活与悬停状态 */
+    /* Scroll Active & Hover States */
     .nav-item.active a,
     .nav-item a:hover {
       color: var(--primary-color);
@@ -126,58 +126,45 @@
     }
     .social-icon:hover { transform: scale(1.1); }
 
-	#about, #careers, #blog, #contact {
-	  padding-top: 80px; /* 用内边距直接把内容顶下来 */
-	  padding-bottom: 40px; /* 顺便留出底部间距 */
-	}
+    #about, #careers, #blog, #contact {
+      padding-top: 80px; /* Use padding to clear the fixed header */
+      padding-bottom: 40px; /* Bottom spacing */
+    }
 
     /* ==========================================================================
-       3. 英雄主视觉区 (Hero Section) - 核心红框交叉曲线实现
+       3. Hero Section - Crossed Curves Implementation
        ========================================================================== */
-	.hero-section::before{
-		content:"";
-
-		position:absolute;
-
-		left:-150px;
-		top:120px;
-
-		width:600px;
-		height:700px;
-
-		background:
-		radial-gradient(
-			circle,
-			rgba(255,107,74,.18),
-			rgba(255,200,61,.08),
-			transparent 70%
-		);
-
-		z-index:1;
-	}
+    .hero-section::before{
+      content:"";
+      position:absolute;
+      left:-150px;
+      top:120px;
+      width:600px;
+      height:700px;
+      background: radial-gradient(
+        circle,
+        rgba(255,107,74,.18),
+        rgba(255,200,61,.08),
+        transparent 70%
+      );
+      z-index:1;
+    }
 
     .hero-section {
       position: relative;
       min-height: 700px;
       background: linear-gradient(135deg, #EBF3FC 0%, #FFFFFF 100%);
-      padding-top: 60px; /* 留出全固顶导航空间 */
+      padding-top: 60px; /* Space for the fixed header */
       overflow: hidden;
       display: flex;
       align-items: center;
-/*
-		background:
-		linear-gradient(
-		135deg,
-		#FF6B4A,
-		#FF8A4C
-		);		*/
     }
 
     .hero-container {
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
-      padding: 0 20px 120px 20px; /* 底部留空给波浪线 */
+      padding: 0 20px 120px 20px; /* Space at the bottom for wave separator */
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -185,7 +172,7 @@
       z-index: 5;
     }
 
-    /* 左侧文字与下载区 */
+    /* Left Text & Download Area */
     .hero-left {
       max-width: 480px;
       position: relative;
@@ -209,15 +196,15 @@
       margin-bottom: 35px;
     }
 
-	.btn-download.disabled {
-	  pointer-events: none; /* 禁用点击、鼠标悬停等所有鼠标事件 */
-	  cursor: default;     /* 将鼠标光标还原为默认，不显示为手型 */
-	  opacity: 0.6;        /* （可选）降低透明度，增强视觉上的“不可用”感 */
-	}
+    .btn-download.disabled {
+      pointer-events: none; /* Disable all mouse events like clicks and hovers */
+      cursor: default;      /* Restore cursor to default instead of pointer */
+      opacity: 0.6;         /* Reduce opacity to enhance the "disabled" feel */
+    }
 
-	.btn-download.disabled img {
-	  filter: grayscale(100%); /* 将图片应用全灰度滤镜 */
-	}
+    .btn-download.disabled img {
+      filter: grayscale(100%); /* Apply full grayscale filter to the image */
+    }
 
     .download-buttons {
       display: flex;
@@ -234,7 +221,7 @@
       box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
 
-    /* 轮播指示指示灯 */
+    /* Carousel Indicators */
     .carousel-indicators {
       display: flex;
       gap: 8px;
@@ -262,7 +249,7 @@
       padding: 0 5px;
     }
 
-    /* 右侧插画区：实现垂直弧形红框 */
+    /* Right Illustration Area: Curved Crop */
     .hero-right {
       position: absolute;
       top: 80px;
@@ -272,36 +259,36 @@
       z-index: 2;
     }
 
-    /* 核心红框1：垂直左侧曲线裁剪 */
+    /* Vertical Left Curve Crop */
     .artwork-wrapper {
       width: 100%;
       height: 100%;
       position: relative;
-      /* 使用向左凸出的抛物线裁剪右侧大图背景 */
+      /* Crop the background image using a left-bulging parabola */
       clip-path: ellipse(100% 120% at 100% 40%);
       background: url('https://picsum.photos/id/244/900/700') no-repeat center center;
       background-size: cover;
     }
 
-    /* 前景 3D 宠物狗（独立出来，突破裁剪限制，达到跃出画面的立体感） */
+    /* Foreground 3D Character Dog (Separated to break through crop limits for 3D pop-out effect) */
     .character-dog {
       position: absolute;
       bottom: 60px;
-      left: 0%; /*10%*/
-      width: 100%; /*55%*/
+      left: 0%;
+      width: 100%;
       z-index: 4;
       pointer-events: none;
       filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
     }
 
-    /* 核心红框2：底部水平白色双波浪分割线 */
+    /* Bottom Horizontal Double Wave Separator */
     .wave-separator {
       position: absolute;
       bottom: -2px;
       left: 0;
       width: 100%;
       height: 140px;
-      z-index: 20; /* 盖在右侧插画和左侧文字背景之上 */
+      z-index: 20; /* Layered over the right artwork and left text background */
       pointer-events: none;
     }
     .wave-separator svg {
@@ -311,7 +298,7 @@
     }
 
     /* ==========================================================================
-       4. 游戏列表区 (Our Games Section) - 带列表切换逻辑
+       4. Our Games Section - With Switching Logic
        ========================================================================== */
     .games-section {
       padding: 0px 20px;
@@ -332,52 +319,29 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    /* 游戏卡片网格容器 */
-	/*
+    
     .games-grid {
-      max-width: 1200px;
-      margin: 0 auto 60px auto;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 20px;
+      display: flex;
+      /* Allow cards to wrap when space is limited */
+      flex-wrap: wrap; 
+      /* Core: Centered alignment on the main axis */
+      justify-content: center; 
+      /* Spacing between cards */
+      gap: 20px;  
+      
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      
+      margin-bottom: 20px;
     }
 
+    /* Ensure children (cards) have a base width and won't stretch infinitely */
     .game-card {
       background: none;
       border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: var(--transition);
+      flex: 0 1 150px; /* Don't grow, can shrink, base width 150px */
     }
-	*/
-	
-	.games-grid {
-	  display: flex;
-	  /* 允许卡片多时自动换行 */
-	  flex-wrap: wrap; 
-	  /* 核心：在主轴上居中对齐（不论是一个还是多个，都会整体居中） */
-	  justify-content: center; 
-	  /* 卡片之间的间距（根据需要自行调整） */
-	  gap: 20px; 
-	  
-	  padding: 20px;
-	  width: 100%;
-	  box-sizing: border-box;
-	  
-	  margin-bottom: 20px;
-	}
-
-	/* 确保子项（卡片）有固定或最大宽度，不至于被无限拉伸 */
-	.game-card {
-      background: none;
-      border: none;
-	  flex: 0 1 150px; /* 不放大，可缩小，基础宽度 150px */
-	}
-
 
     .game-icon-wrapper {
       position: relative;
@@ -397,7 +361,7 @@
       object-fit: cover;
     }
 
-    /* 状态小标签角标 (如爱心、星星) */
+    /* Status Badges (e.g., Paws, Stars) */
     .badge {
       position: absolute;
       bottom: 2px;
@@ -419,7 +383,7 @@
       transition: var(--transition);
     }
 
-    /* 当前选中高亮状态 (还原橙色外圈) */
+    /* Active Highlight State (Orange outer ring) */
     .game-card.active .game-icon-wrapper {
       background: linear-gradient(135deg, #FF8A00, #FF5A1F);
       box-shadow: 0 8px 20px rgba(255, 90, 31, 0.3);
@@ -430,7 +394,7 @@
     }
 
     /* ==========================================================================
-       5. 核心价值特性区 (Values Section)
+       5. Core Values Section
        ========================================================================== */
     .values-section {
       padding: 40px 20px 80px 20px;
@@ -481,14 +445,14 @@
       line-height: 1.4;
     }
 
-    /* 各卡片主题色彩定制 */
+    /* Theme color customizations for each card */
     .v-play .value-title { color: #FF4A4A; }
     .v-connect .value-title { color: #FFB800; }
     .v-grow .value-title { color: #00C2FF; }
     .v-imagine .value-title { color: #A347FF; }
     .v-achieve .value-title { color: #FF9900; }
 
-    /* 其他用于锚点占位的Section，测试滚动菜单使用 */
+    /* Dummy section for anchor/scroll testing */
     .dummy-section {
       padding: 100px 20px;
       background: var(--bg-light);
@@ -497,7 +461,7 @@
     }
 
     /* ==========================================================================
-       6. 移动端响应式自适应适配 (Responsive Media Queries)
+       6. Responsive Media Queries
        ========================================================================== */
     @media (max-width: 1024px) {
       .hero-container { grid-template-columns: 1fr; padding-bottom: 160px; }
@@ -510,7 +474,7 @@
     }
 
     @media (max-width: 768px) {
-      .nav-menu, .social-links { display: none; } /* 移动端精简菜单 */
+      .nav-menu, .social-links { display: none; } /* Simplified menu for mobile */
       .games-grid { grid-template-columns: repeat(2, 1fr); }
       .values-grid { grid-template-columns: 1fr; }
       .wave-separator { height: 80px; }
@@ -529,7 +493,6 @@
           <li class="nav-item active" data-section="home"><a href="#home">Home</a></li>
           <li class="nav-item" data-section="about"><a href="#about">About Us</a></li>
           <li class="nav-item" data-section="careers"><a href="#careers">Careers</a></li>
-          <!--<li class="nav-item" data-section="blog"><a href="#blog">Blog</a></li>-->
           <li class="nav-item" data-section="contact"><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -559,7 +522,6 @@
           <span class="dot active"></span>
           <span class="dot"></span>
           <span class="dot"></span>
-          <!--<span class="dot"></span>-->
           <button class="arrow" onclick="nextGame()" style="font-size: 24px;">&gt;</button>
         </div>
       </div>
@@ -582,7 +544,7 @@
     <h2 class="section-title">
       <span style="color:#FFB800">✦</span> Our Games <span style="color:#00C2FF">✦</span>
     </h2>
-    
+     
     <div class="games-grid">
       <button class="game-card active" onclick="switchGame(0, this)">
         <span class="game-name" style="display: block; margin-bottom: 15px;">Space Hunter</span>
@@ -607,32 +569,6 @@
           <span class="badge" style="background:#FFBF69">★</span>
         </div>
       </button>
-
-<!--
-      <button class="game-card" onclick="switchGame(3, this)">
-        <div class="game-icon-wrapper">
-          <img src="https://via.placeholder.com/150/2EC4B6/fff?text=Cat" alt="Pet Friends">
-          <span class="badge" style="background:#011627">👥</span>
-        </div>
-        <span class="game-name">Pet Friends</span>
-      </button>
-
-      <button class="game-card" onclick="switchGame(4, this)">
-        <div class="game-icon-wrapper">
-          <img src="https://via.placeholder.com/150/3A86C8/fff?text=Wizard" alt="Magic Match">
-          <span class="badge" style="background:#8338EC">✦</span>
-        </div>
-        <span class="game-name">Magic Match</span>
-      </button>
-
-      <button class="game-card" onclick="switchGame(5, this)">
-        <div class="game-icon-wrapper">
-          <img src="https://via.placeholder.com/150/FF006E/fff?text=Rabbit" alt="Bunny's Farm">
-          <span class="badge" style="background:#3A86FF">❤️</span>
-        </div>
-        <span class="game-name">Bunny's Farm</span>
-      </button>
--->
     </div>
   </section>
 
@@ -662,32 +598,28 @@
   </section>
 
   <section id="about">
-	<img src="res/AboutUs.png" alt="About DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
+    <img src="res/AboutUs.png" alt="About DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
   </section>
 
   <section id="careers">
-	<img src="res/Careers.png" alt="Careers in DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
+    <img src="res/Careers.png" alt="Careers at DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
   </section>
   
-  <!--<section id="blog" class="dummy-section"><h2>Blog Section</h2><p>企业博客板块内容占位</p></section>-->
   <section id="contact">
-	<img src="res/ContactUs.png" alt="Contact Us" width="60%" style="display: block; margin: 0 auto;">
+    <img src="res/ContactUs.png" alt="Contact Us" width="60%" style="display: block; margin: 0 auto;">
   </section>
 
   <script>
-    // 模拟不同游戏切换对应的数据源
+    // Mock data source for switching different games
     const mockGameData = [
       { title: "Space Hunter", bg: "https://picsum.photos/id/244/900/700", char: "res/games/gameshow_space_hunter.png", desc: "Amidst exploration, conflict, and the struggle for survival, the brave are writing an interstellar epic for humanity's future." },
       { title: "Legends Of Duck", bg: "https://picsum.photos/id/104/900/700", char: "res/games/gameshow_duck.png", desc: "Players lead their own armies, growing stronger and evolving over time, as they experience humanity's progression from ancient civilizations to future ones." },
-      { title: "Mystery Of Nile", bg: "https://picsum.photos/id/327/900/700", char: "res/games/gameshow_nile.png", desc: "A casual game set against the backdrop of ancient Egyptian civilization, blending match-3 and puzzle gameplay." },
-      //{ title: "Pet Friends", bg: "https://picsum.photos/id/219/900/700", char: "https://via.placeholder.com/350x350/2EC4B6/fff?text=Cat+Hero", desc:"" },
-      //{ title: "Magic Match", bg: "https://picsum.photos/id/184/900/700", char: "https://via.placeholder.com/350x350/3A86C8/fff?text=Wizard+Hero", desc: "" },
-      //{ title: "Bunny's Farm", bg: "https://picsum.photos/id/312/900/700", char: "https://via.placeholder.com/350x350/FF006E/fff?text=Bunny+Hero", desc: "" }
+      { title: "Mystery Of Nile", bg: "https://picsum.photos/id/327/900/700", char: "res/games/gameshow_nile.png", desc: "A casual game set against the backdrop of ancient Egyptian civilization, blending match-3 and puzzle gameplay." }
     ];
 
-    // 交互逻辑 1：点击下方游戏小图切换主视觉 Banner 内容
+    // Interaction Logic 1: Click small game cards below to switch Main Hero Banner content
     function switchGame(index, element) {
-      // 更新卡片激活样式
+      // Update card active styles
       document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active'));
       if(element) {
         element.classList.add('active');
@@ -696,12 +628,12 @@
         if(cards[index]) cards[index].classList.add('active');
       }
 
-      // 伴随更新轮播的小点提示灯
+      // Update carousel dot indicators
       document.querySelectorAll('.dot').forEach((dot, idx) => {
         dot.classList.toggle('active', idx === index);
       });
 
-      // 替换内容
+      // Replace content
       const data = mockGameData[index];
       if(data) {
         document.getElementById('current-game-title').src = `res/games/title_${encodeURIComponent(data.title)}.png`;
@@ -711,41 +643,39 @@
       }
     }
 
-	// 新增：维护一个全局当前激活的游戏索引（默认第0个）
-	let currentGameIndex = 0;	
-	
-	// 新增交互逻辑：点击左键切换到上一个游戏
-	function prevGame() {
-	  // 计算上一个索引，如果小于0则循环回到最后一个游戏
-	  let newIndex = currentGameIndex - 1;
-	  if (newIndex < 0) {
-		newIndex = mockGameData.length - 1; // 顺延到最后一个
-	  }
-	  // 如果你只想展示前3个激活的卡片，这里可以改为 newIndex = 2;
-	  
-	  currentGameIndex = newIndex;
-	  switchGame(newIndex, null);
-	}
+    // Maintain a global index for the currently active game (default is 0)
+    let currentGameIndex = 0;  
+  
+    // Interaction Logic: Click left arrow to switch to the previous game
+    function prevGame() {
+      // Calculate previous index, wrap around to the last game if less than 0
+      let newIndex = currentGameIndex - 1;
+      if (newIndex < 0) {
+        newIndex = mockGameData.length - 1;
+      }
+      
+      currentGameIndex = newIndex;
+      switchGame(newIndex, null);
+    }
 
-	// 新增交互逻辑：点击右键切换到下一个游戏
-	function nextGame() {
-	  // 计算下一个索引，如果超出数组长度则循环回到第0个游戏
-	  let newIndex = currentGameIndex + 1;
-	  if (newIndex >= mockGameData.length) {
-		newIndex = 0; // 回到第0个
-	  }
-	  // 注意：由于你在 HTML 中注释掉了后3个卡片，如果你只想在现有的 3 个游戏中循环，可以把上面这句改为：if (newIndex >= 3) newIndex = 0;
-	  currentGameIndex = newIndex;
-	  switchGame(newIndex, null);
-	}	
+    // Interaction Logic: Click right arrow to switch to the next game
+    function nextGame() {
+      // Calculate next index, wrap around to 0 if exceeding array length
+      let newIndex = currentGameIndex + 1;
+      if (newIndex >= mockGameData.length) {
+        newIndex = 0;
+      }
+      currentGameIndex = newIndex;
+      switchGame(newIndex, null);
+    }  
 
-    // 交互逻辑 2：页面上下滚动时，自动高亮顶部对应的菜单项
+    // Interaction Logic 2: Automatically highlight top menu item when scrolling page up and down
     const sections = document.querySelectorAll('section[id]');
     const navItems = document.querySelectorAll('.nav-item');
 
     window.addEventListener('scroll', () => {
       let currentSectionId = "home";
-      const scrollY = window.pageYOffset + 120; // 考虑固定导航栏高度的偏移
+      const scrollY = window.pageYOffset + 120; // Offset considering the fixed header height
 
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
