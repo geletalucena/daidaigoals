@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaiDaiGoals - Connecting Hearts Through Play</title>
+  <style>
+ 
+    /* ==========================================================================
+       1. 全局初始化与变量定义 (Reset & Variables)
+       ========================================================================== */
+    :root {
+      --primary-color: #FF5A1F;
+      --text-main: #0B1B3D;
+      --text-muted: #657795;
+      --bg-light: #F4F7FC;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-main);
+      background-color: #ffffff;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ==========================================================================
+       2. 导航栏 (Header & Navigation) - 固顶并带滚动高亮
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+      backdrop-filter: blur(5px);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 80px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-item a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      position: relative;
+      padding: 5px 0;
+      transition: var(--transition);
+    }
+
+    /* 滚动激活与悬停状态 */
+    .nav-item.active a,
+    .nav-item a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-item.active a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-color);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .social-icon:hover { transform: scale(1.1); }
+
+	#about, #careers, #blog, #contact {
+	  padding-top: 80px; /* 用内边距直接把内容顶下来 */
+	  padding-bottom: 40px; /* 顺便留出底部间距 */
+	}
+
+    /* ==========================================================================
+       3. 英雄主视觉区 (Hero Section) - 核心红框交叉曲线实现
+       ========================================================================== */
+	.hero-section::before{
+		content:"";
+
+		position:absolute;
+
+		left:-150px;
+		top:120px;
+
+		width:600px;
+		height:700px;
+
+		background:
+		radial-gradient(
+			circle,
+			rgba(255,107,74,.18),
+			rgba(255,200,61,.08),
+			transparent 70%
+		);
+
+		z-index:1;
+	}
+
+    .hero-section {
+      position: relative;
+      min-height: 700px;
+      background: linear-gradient(135deg, #EBF3FC 0%, #FFFFFF 100%);
+      padding-top: 60px; /* 留出全固顶导航空间 */
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+/*
+		background:
+		linear-gradient(
+		135deg,
+		#FF6B4A,
+		#FF8A4C
+		);		*/
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 20px 120px 20px; /* 底部留空给波浪线 */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* 左侧文字与下载区 */
+    .hero-left {
+      max-width: 480px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .game-logo {
+      margin-bottom: -20px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+	.btn-download.disabled {
+	  pointer-events: none; /* 禁用点击、鼠标悬停等所有鼠标事件 */
+	  cursor: default;     /* 将鼠标光标还原为默认，不显示为手型 */
+	  opacity: 0.6;        /* （可选）降低透明度，增强视觉上的“不可用”感 */
+	}
+
+	.btn-download.disabled img {
+	  filter: grayscale(100%); /* 将图片应用全灰度滤镜 */
+	}
+
+    .download-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .btn-download {
+      transition: var(--transition);
+    }
+    .btn-download:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    /* 轮播指示指示灯 */
+    .carousel-indicators {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #D2DCEB;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .dot.active {
+      background-color: #FF5A1F;
+      width: 12px;
+      border-radius: 4px;
+    }
+    .arrow {
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0 5px;
+    }
+
+    /* 右侧插画区：实现垂直弧形红框 */
+    .hero-right {
+      position: absolute;
+      top: 80px;
+      right: 0;
+      width: 55%;
+      height: calc(100% - 80px);
+      z-index: 2;
+    }
+
+    /* 核心红框1：垂直左侧曲线裁剪 */
+    .artwork-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      /* 使用向左凸出的抛物线裁剪右侧大图背景 */
+      clip-path: ellipse(100% 120% at 100% 40%);
+      background: url('https://picsum.photos/id/244/900/700') no-repeat center center;
+      background-size: cover;
+    }
+
+    /* 前景 3D 宠物狗（独立出来，突破裁剪限制，达到跃出画面的立体感） */
+    .character-dog {
+      position: absolute;
+      bottom: 60px;
+      left: 0%; /*10%*/
+      width: 100%; /*55%*/
+      z-index: 4;
+      pointer-events: none;
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+    }
+
+    /* 核心红框2：底部水平白色双波浪分割线 */
+    .wave-separator {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 140px;
+      z-index: 20; /* 盖在右侧插画和左侧文字背景之上 */
+      pointer-events: none;
+    }
+    .wave-separator svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ==========================================================================
+       4. 游戏列表区 (Our Games Section) - 带列表切换逻辑
+       ========================================================================== */
+    .games-section {
+      padding: 0px 20px;
+      background-color: #ffffff;
+      text-align: center;
+      position: relative;
+      z-index: 25;
+    }
+
+    .section-title {
+      font-size: 28px;
+      color: var(--text-main);
+      margin-bottom: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 游戏卡片网格容器 */
+	/*
+    .games-grid {
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+    }
+
+    .game-card {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: var(--transition);
+    }
+	*/
+	
+	.games-grid {
+	  display: flex;
+	  /* 允许卡片多时自动换行 */
+	  flex-wrap: wrap; 
+	  /* 核心：在主轴上居中对齐（不论是一个还是多个，都会整体居中） */
+	  justify-content: center; 
+	  /* 卡片之间的间距（根据需要自行调整） */
+	  gap: 20px; 
+	  
+	  padding: 20px;
+	  width: 100%;
+	  box-sizing: border-box;
+	  
+	  margin-bottom: 20px;
+	}
+
+	/* 确保子项（卡片）有固定或最大宽度，不至于被无限拉伸 */
+	.game-card {
+      background: none;
+      border: none;
+	  flex: 0 1 150px; /* 不放大，可缩小，基础宽度 150px */
+	}
+
+
+    .game-icon-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 28px;
+      padding: 6px;
+      background: transparent;
+      transition: var(--transition);
+      margin-bottom: 12px;
+    }
+
+    .game-icon-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: 22px;
+      object-fit: cover;
+    }
+
+    /* 状态小标签角标 (如爱心、星星) */
+    .badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+      font-size: 12px;
+    }
+
+    .game-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    /* 当前选中高亮状态 (还原橙色外圈) */
+    .game-card.active .game-icon-wrapper {
+      background: linear-gradient(135deg, #FF8A00, #FF5A1F);
+      box-shadow: 0 8px 20px rgba(255, 90, 31, 0.3);
+      transform: translateY(-5px);
+    }
+    .game-card.active .game-name {
+      color: var(--primary-color);
+    }
+
+    /* ==========================================================================
+       5. 核心价值特性区 (Values Section)
+       ========================================================================== */
+    .values-section {
+      padding: 40px 20px 80px 20px;
+      background-color: #ffffff;
+    }
+
+    .values-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .value-card {
+      background-color: var(--bg-light);
+      border-radius: 16px;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: var(--transition);
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .value-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .value-icon {
+      font-size: 24px;
+    }
+
+    .value-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .value-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* 各卡片主题色彩定制 */
+    .v-play .value-title { color: #FF4A4A; }
+    .v-connect .value-title { color: #FFB800; }
+    .v-grow .value-title { color: #00C2FF; }
+    .v-imagine .value-title { color: #A347FF; }
+    .v-achieve .value-title { color: #FF9900; }
+
+    /* 其他用于锚点占位的Section，测试滚动菜单使用 */
+    .dummy-section {
+      padding: 100px 20px;
+      background: var(--bg-light);
+      text-align: center;
+      border-top: 1px solid #e1e8f5;
+    }
+
+    /* ==========================================================================
+       6. 移动端响应式自适应适配 (Responsive Media Queries)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-container { grid-template-columns: 1fr; padding-bottom: 160px; }
+      .hero-left { max-width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .hero-right { width: 100%; height: 50%; top: auto; bottom: 80px; }
+      .artwork-wrapper { clip-path: ellipse(120% 100% at 50% 100%); }
+      .character-dog { width: 35%; left: 32%; bottom: 20px; }
+      .games-grid { grid-template-columns: repeat(3, 1fr); }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu, .social-links { display: none; } /* 移动端精简菜单 */
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: 1fr; }
+      .wave-separator { height: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#home" class="logo">
+        <img src="res/logo_ddg.png" alt="Logo" class="logo-img">
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item active" data-section="home"><a href="#home">Home</a></li>
+          <li class="nav-item" data-section="about"><a href="#about">About Us</a></li>
+          <li class="nav-item" data-section="careers"><a href="#careers">Careers</a></li>
+          <!--<li class="nav-item" data-section="blog"><a href="#blog">Blog</a></li>-->
+          <li class="nav-item" data-section="contact"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social-links">
+        <a href="#" class="social-icon" style="background:#0077B5;"><img src="res/btn_social_linkedin.png" alt="linkedin"></a>
+        <a href="#" class="social-icon" style="background:#000000;"><img src="res/btn_social_X.png" alt="X"></a>
+        <a href="#" class="social-icon" style="background:#5865F2;"><img src="res/btn_social_discord.png" alt="discord"></a>
+        <a href="#" class="social-icon" style="background:#E1306C;"><img src="res/btn_social_instagram.png" alt="instagram"></a>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="hero-section">
+    <div class="hero-container">
+      <div class="hero-left">
+        <div class="game-logo">
+          <img id="current-game-title" src="res/games/title_Space Hunter.png" alt="Space Hunter">
+        </div>
+        <p id="hero-desc" class="hero-desc">Amidst exploration, conflict, and the struggle for survival,the brave are writing an interstellar epic for humanity's future.</p>
+        <div class="download-buttons">
+          <a href="#" class="btn-download disabled"><img src="res/btn_download_windows.png" alt="Windows" width="128"></a>
+          <a href="#" class="btn-download disabled"><img src="res/btn_download_googleplay.png" alt="Google Play" width="128"></a>
+          <a href="#" class="btn-download disabled"><img src="res/btn_download_iOS.png" alt="App Store" width="128"></a>
+        </div>
+        <div class="carousel-indicators">
+          <button class="arrow" onclick="prevGame()" style="font-size: 24px;">&lt;</button>
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <!--<span class="dot"></span>-->
+          <button class="arrow" onclick="nextGame()" style="font-size: 24px;">&gt;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="artwork-wrapper" id="dynamic-hero-bg"></div>
+      <img class="character-dog" id="dynamic-hero-character" src="res/games/gameshow_space_hunter.png" alt="Space Hunter" width="1920">
+    </div>
+
+    <div class="wave-separator">
+      <svg viewBox="0 0 1440 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,70 C360,130 720,20 1080,90 C1260,125 1380,105 1440,90 L1440,140 L0,140 Z" fill="#EBF3FC" opacity="0.6"/>
+        <path d="M0,90 C360,20 720,120 1080,50 C1260,15 1380,45 1440,60 L1440,140 L0,140 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="games-section">
+    <h2 class="section-title">
+      <span style="color:#FFB800">✦</span> Our Games <span style="color:#00C2FF">✦</span>
+    </h2>
+    
+    <div class="games-grid">
+      <button class="game-card active" onclick="switchGame(0, this)">
+        <span class="game-name" style="display: block; margin-bottom: 15px;">Space Hunter</span>
+        <div class="game-icon-wrapper">
+          <img src="res/games/gameshow_space_hunter.png" alt="Space Hunter">
+          <span class="badge" style="background:#FF5A1F">🐾</span>
+        </div>
+      </button>
+
+      <button class="game-card" onclick="switchGame(1, this)">
+        <span class="game-name" style="display: block; margin-bottom: 15px;">Legends Of Duck</span>
+        <div class="game-icon-wrapper">
+          <img src="res/games/gameshow_duck.png" alt="Legends Of Duck">
+          <span class="badge" style="background:#9D4EDD">⭐</span>
+        </div>
+      </button>
+
+      <button class="game-card" onclick="switchGame(2, this)">
+        <span class="game-name" style="display: block; margin-bottom: 15px;">Mystery Of Nile</span>
+        <div class="game-icon-wrapper">
+          <img src="res/games/gameshow_nile.png" alt="Mystery Of Nile">
+          <span class="badge" style="background:#FFBF69">★</span>
+        </div>
+      </button>
+
+<!--
+      <button class="game-card" onclick="switchGame(3, this)">
+        <div class="game-icon-wrapper">
+          <img src="https://via.placeholder.com/150/2EC4B6/fff?text=Cat" alt="Pet Friends">
+          <span class="badge" style="background:#011627">👥</span>
+        </div>
+        <span class="game-name">Pet Friends</span>
+      </button>
+
+      <button class="game-card" onclick="switchGame(4, this)">
+        <div class="game-icon-wrapper">
+          <img src="https://via.placeholder.com/150/3A86C8/fff?text=Wizard" alt="Magic Match">
+          <span class="badge" style="background:#8338EC">✦</span>
+        </div>
+        <span class="game-name">Magic Match</span>
+      </button>
+
+      <button class="game-card" onclick="switchGame(5, this)">
+        <div class="game-icon-wrapper">
+          <img src="https://via.placeholder.com/150/FF006E/fff?text=Rabbit" alt="Bunny's Farm">
+          <span class="badge" style="background:#3A86FF">❤️</span>
+        </div>
+        <span class="game-name">Bunny's Farm</span>
+      </button>
+-->
+    </div>
+  </section>
+
+  <section class="values-section">
+    <div class="values-grid">
+      <div class="value-card v-play">
+        <div class="value-header"><span class="value-icon">❤️</span><h3 class="value-title">PLAY</h3></div>
+        <p class="value-desc">We create fun and engaging experiences.</p>
+      </div>
+      <div class="value-card v-connect">
+        <div class="value-header"><span class="value-icon">👥</span><h3 class="value-title">CONNECT</h3></div>
+        <p class="value-desc">We bring people together through games.</p>
+      </div>
+      <div class="value-card v-grow">
+        <div class="value-header"><span class="value-icon">📈</span><h3 class="value-title">GROW</h3></div>
+        <p class="value-desc">We inspire growth and achievement every day.</p>
+      </div>
+      <div class="value-card v-imagine">
+        <div class="value-header"><span class="value-icon">✦</span><h3 class="value-title">IMAGINE</h3></div>
+        <p class="value-desc">We explore limitless worlds of imagination.</p>
+      </div>
+      <div class="value-card v-achieve">
+        <div class="value-header"><span class="value-icon">⭐</span><h3 class="value-title">ACHIEVE</h3></div>
+        <p class="value-desc">We celebrate every goal reached.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+	<img src="res/AboutUs.png" alt="About DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
+  </section>
+
+  <section id="careers">
+	<img src="res/Careers.png" alt="Careers in DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
+  </section>
+  
+  <!--<section id="blog" class="dummy-section"><h2>Blog Section</h2><p>企业博客板块内容占位</p></section>-->
+  <section id="contact">
+	<img src="res/ContactUs.png" alt="Contact Us" width="60%" style="display: block; margin: 0 auto;">
+  </section>
+
+  <script>
+    // 模拟不同游戏切换对应的数据源
+    const mockGameData = [
+      { title: "Space Hunter", bg: "https://picsum.photos/id/244/900/700", char: "res/games/gameshow_space_hunter.png", desc: "Amidst exploration, conflict, and the struggle for survival, the brave are writing an interstellar epic for humanity's future." },
+      { title: "Legends Of Duck", bg: "https://picsum.photos/id/104/900/700", char: "res/games/gameshow_duck.png", desc: "Players lead their own armies, growing stronger and evolving over time, as they experience humanity's progression from ancient civilizations to future ones." },
+      { title: "Mystery Of Nile", bg: "https://picsum.photos/id/327/900/700", char: "res/games/gameshow_nile.png", desc: "A casual game set against the backdrop of ancient Egyptian civilization, blending match-3 and puzzle gameplay." },
+      //{ title: "Pet Friends", bg: "https://picsum.photos/id/219/900/700", char: "https://via.placeholder.com/350x350/2EC4B6/fff?text=Cat+Hero", desc:"" },
+      //{ title: "Magic Match", bg: "https://picsum.photos/id/184/900/700", char: "https://via.placeholder.com/350x350/3A86C8/fff?text=Wizard+Hero", desc: "" },
+      //{ title: "Bunny's Farm", bg: "https://picsum.photos/id/312/900/700", char: "https://via.placeholder.com/350x350/FF006E/fff?text=Bunny+Hero", desc: "" }
+    ];
+
+    // 交互逻辑 1：点击下方游戏小图切换主视觉 Banner 内容
+    function switchGame(index, element) {
+      // 更新卡片激活样式
+      document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active'));
+      if(element) {
+        element.classList.add('active');
+      } else {
+        const cards = document.querySelectorAll('.game-card');
+        if(cards[index]) cards[index].classList.add('active');
+      }
+
+      // 伴随更新轮播的小点提示灯
+      document.querySelectorAll('.dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+
+      // 替换内容
+      const data = mockGameData[index];
+      if(data) {
+        document.getElementById('current-game-title').src = `res/games/title_${encodeURIComponent(data.title)}.png`;
+        document.getElementById('dynamic-hero-bg').style.backgroundImage = `url('${data.bg}')`;
+        document.getElementById('dynamic-hero-character').src = data.char;
+        document.getElementById('hero-desc').textContent = data.desc;
+      }
+    }
+
+	// 新增：维护一个全局当前激活的游戏索引（默认第0个）
+	let currentGameIndex = 0;	
+	
+	// 新增交互逻辑：点击左键切换到上一个游戏
+	function prevGame() {
+	  // 计算上一个索引，如果小于0则循环回到最后一个游戏
+	  let newIndex = currentGameIndex - 1;
+	  if (newIndex < 0) {
+		newIndex = mockGameData.length - 1; // 顺延到最后一个
+	  }
+	  // 如果你只想展示前3个激活的卡片，这里可以改为 newIndex = 2;
+	  
+	  currentGameIndex = newIndex;
+	  switchGame(newIndex, null);
+	}
+
+	// 新增交互逻辑：点击右键切换到下一个游戏
+	function nextGame() {
+	  // 计算下一个索引，如果超出数组长度则循环回到第0个游戏
+	  let newIndex = currentGameIndex + 1;
+	  if (newIndex >= mockGameData.length) {
+		newIndex = 0; // 回到第0个
+	  }
+	  // 注意：由于你在 HTML 中注释掉了后3个卡片，如果你只想在现有的 3 个游戏中循环，可以把上面这句改为：if (newIndex >= 3) newIndex = 0;
+	  currentGameIndex = newIndex;
+	  switchGame(newIndex, null);
+	}	
+
+    // 交互逻辑 2：页面上下滚动时，自动高亮顶部对应的菜单项
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    window.addEventListener('scroll', () => {
+      let currentSectionId = "home";
+      const scrollY = window.pageYOffset + 120; // 考虑固定导航栏高度的偏移
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('data-section') === currentSectionId);
+      });
+    });
+  </script>
+</body>
+</html>
