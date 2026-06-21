@@ -130,6 +130,20 @@
       padding-top: 80px; /* Use padding to clear the fixed header */
       padding-bottom: 40px; /* Bottom spacing */
     }
+	
+	.responsive-image {
+		display: block;
+		margin: 0 auto;
+		width: 60%;
+		height: auto;
+	}
+
+	/* 手机端 */
+	@media screen and (max-width: 768px) {
+		.responsive-image {
+			width: 100%;
+		}
+	}	
 
     /* ==========================================================================
        3. Hero Section - Crossed Curves Implementation
@@ -479,6 +493,7 @@
       .values-grid { grid-template-columns: 1fr; }
       .wave-separator { height: 80px; }
     }
+	
   </style>
 </head>
 <body>
@@ -610,16 +625,16 @@
   </section>
   
 	<section id="about">
-	  <img src="res/AboutUs.png" alt="About DaiDaiGoals" style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;">
+		<img src="res/AboutUs.png" alt="About DaiDaiGoals" class="responsive-image">
 	</section>
 
 	<section id="careers">
-	  <img src="res/Careers.png" alt="Careers at DaiDaiGoals" style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;">
+		<img src="res/Careers.png" alt="Careers at DaiDaiGoals" class="responsive-image">
 	</section>
 
 	<section id="contact">
-	  <img src="res/ContactUs.png" alt="Contact Us" style="width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto;">
-	</section> 
+		<img src="res/ContactUs.png" alt="Contact Us" class="responsive-image">
+	</section>
 
   <script>
     // Mock data source for switching different games
