@@ -670,7 +670,7 @@
       const data = mockGameData[index];
       if(data) {
         document.getElementById('current-game-title').src = `res/games/title_${encodeURIComponent(data.title)}.png`;
-        document.getElementById('dynamic-hero-bg').style.backgroundImage = `url('${data.bg}')`;
+        //document.getElementById('dynamic-hero-bg').style.backgroundImage = `url('${data.bg}')`;
         document.getElementById('dynamic-hero-character').src = data.char;
         document.getElementById('hero-desc').textContent = data.desc;
       }
