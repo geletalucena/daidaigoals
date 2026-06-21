@@ -285,7 +285,6 @@
     }
 
     /* Foreground 3D Character Dog (Separated to break through crop limits for 3D pop-out effect) */
-	/*
     .character-dog {
       position: absolute;
       bottom: 60px;
@@ -294,25 +293,20 @@
       z-index: 4;
       pointer-events: none;
       filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
-    }*/
-
-	.character-dog {
-		position: absolute;
-		bottom: 60px;
-		left: 0;
-		width: 100%;
-		z-index: 4;
-		pointer-events: none;
-		filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
-	}
+    }
 
 	@media (max-width: 768px) {
+		.hero-right {
+			height: 55vh;
+			min-height: 420px;
+		}
+
 		.character-dog {
 			width: 180%;
 			left: -40%;
 			bottom: 0;
 		}
-	}	
+	}
 
     /* Bottom Horizontal Double Wave Separator */
     .wave-separator {
