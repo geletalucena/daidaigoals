@@ -285,6 +285,7 @@
     }
 
     /* Foreground 3D Character Dog (Separated to break through crop limits for 3D pop-out effect) */
+	/*
     .character-dog {
       position: absolute;
       bottom: 60px;
@@ -293,7 +294,25 @@
       z-index: 4;
       pointer-events: none;
       filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
-    }
+    }*/
+
+	.character-dog {
+		position: absolute;
+		bottom: 60px;
+		left: 0;
+		width: 100%;
+		z-index: 4;
+		pointer-events: none;
+		filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+	}
+
+	@media (max-width: 768px) {
+		.character-dog {
+			width: 180%;
+			left: -40%;
+			bottom: 0;
+		}
+	}	
 
     /* Bottom Horizontal Double Wave Separator */
     .wave-separator {
@@ -612,18 +631,6 @@
     </div>
   </section>
 
-  <section id="about">
-    <img src="res/AboutUs.png" alt="About DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
-  </section>
-
-  <section id="careers">
-    <img src="res/Careers.png" alt="Careers at DaiDaiGoals" width="60%" style="display: block; margin: 0 auto;">
-  </section>
-  
-  <section id="contact">
-    <img src="res/ContactUs.png" alt="Contact Us" width="60%" style="display: block; margin: 0 auto;">
-  </section>
-  
 	<section id="about">
 		<img src="res/AboutUs.png" alt="About DaiDaiGoals" class="responsive-image">
 	</section>
