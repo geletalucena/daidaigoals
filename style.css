@@ -1,0 +1,544 @@
+/* ==========================================================================
+   1. Reset & Variables
+   ========================================================================== */
+:root {
+  --primary-color: #FF5A1F;
+  --text-main: #FFFFFF; /* 已同步修改：为了适应深紫色背景，主要文字改为白色 */
+  --text-muted: #A0AEC0; /* 已同步修改：为了适应深紫色背景，次要文字改为浅灰 */
+  --bg-light: rgba(255, 255, 255, 0.1); /* 已同步修改：卡片改为半透明，更适应暗色调 */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-main);
+  background-color: #1a0933;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   2. Header & Navigation - Fixed with Scroll Highlight
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #1a0933;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  backdrop-filter: blur(5px);
+}
+
+.header-container {
+  background-color: transparent;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 80px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: var(--text-muted); /* 浅灰色文字 */
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  position: relative;
+  padding: 5px 0;
+  transition: var(--transition);
+}
+
+/* Scroll Active & Hover States */
+.nav-item.active a,
+.nav-item a:hover {
+  color: var(--primary-color);
+}
+
+.nav-item.active a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px 3px 0 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.social-icon:hover { transform: scale(1.1); }
+
+#about, #careers, #blog, #contact {
+  padding-top: 80px; /* Use padding to clear the fixed header */
+  padding-bottom: 40px; /* Bottom spacing */
+}
+
+.responsive-image {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  height: auto;
+}
+
+/* for mobile */
+@media screen and (max-width: 768px) {
+  .responsive-image {
+    width: 100%;
+  }
+}	
+
+/* ==========================================================================
+   3. Hero Section - Crossed Curves Implementation
+   ========================================================================== */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  left: -150px;
+  top: 120px;
+  width: 600px;
+  height: 700px;
+  background: radial-gradient(
+    circle,
+    rgba(255,107,74,.18),
+    rgba(255,200,61,.08),
+    transparent 70%
+  );
+  z-index: 1;
+}
+
+.hero-section {
+  position: relative;
+  min-height: 700px;
+  background: transparent; /* 已同步修改：改为透明，露出统一的深紫色大背景 */
+  padding-top: 60px; /* Space for the fixed header */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px 120px 20px; /* Space at the bottom for wave separator */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+/* Left Text & Download Area */
+.hero-left {
+  max-width: 480px;
+  position: relative;
+  z-index: 10;
+}
+
+.game-logo {
+  margin-bottom: -20px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+}
+
+.btn-download.disabled {
+  pointer-events: none; /* Disable all mouse events like clicks and hovers */
+  cursor: default;      /* Restore cursor to default instead of pointer */
+  opacity: 0.4;         /* Reduce opacity to enhance the "disabled" feel */
+}
+
+.btn-download.disabled img {
+  filter: grayscale(100%); /* Apply full grayscale filter to the image */
+}
+
+.download-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.btn-download {
+  transition: var(--transition);
+}
+.btn-download:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4a3b68; /* 已同步修改：调暗未激活的圆点适应紫色背景 */
+  cursor: pointer;
+  transition: var(--transition);
+}
+.dot.active {
+  background-color: #FF5A1F;
+  width: 12px;
+  border-radius: 4px;
+}
+.arrow {
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+/* Right Illustration Area: Curved Crop */
+.hero-right {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 55%;
+  height: calc(100% - 80px);
+  z-index: 2;
+}
+
+/* Vertical Left Curve Crop */
+.artwork-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  clip-path: ellipse(100% 120% at 100% 40%);
+  background: url('https://picsum.photos/id/244/900/700') no-repeat center center;
+  background-size: cover;
+}
+
+/* Foreground 3D Character Dog */
+.character-dog {
+  position: absolute;
+  bottom: 60px;
+  left: 0%;
+  width: 100%;
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+}
+
+@media (max-width: 768px) {
+  .hero-right { height: 55vh; min-height: 420px; }
+  .character-dog { width: 180%; left: -40%; bottom: 0; }		
+  .download-buttons { display: flex; flex-wrap: nowrap; justify-content: center; gap: 8px; width: 100%; }
+  .btn-download img { width: 100px; height: auto; }		
+}
+
+/* Bottom Horizontal Double Wave Separator */
+.wave-separator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  z-index: 20;
+  pointer-events: none;
+}
+.wave-separator svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Ensured the underlying waves transition naturally and blend into the purple background */
+.wave-separator path:nth-child(1) { fill: #1a0933; opacity: 0.3; }
+.wave-separator path:nth-child(2) { fill: #1a0933; opacity: 0.5; }
+
+/* ==========================================================================
+   4. Our Games Section - With Switching Logic
+   ========================================================================== */
+.games-section {
+  padding: 0px 20px;
+  background: transparent;
+  text-align: center;
+  position: relative;
+  z-index: 25;
+}
+
+.section-title {
+  font-size: 28px;
+  color: var(--text-main);
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.games-grid {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 20px;  
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.game-card {
+  background: none;
+  border: none;
+  flex: 0 1 150px;
+}
+
+.game-icon-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 28px;
+  padding: 6px;
+  background: transparent;
+  transition: var(--transition);
+  margin-bottom: 12px;
+}
+
+.game-icon-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  object-fit: cover;
+}
+
+/* Status Badges */
+.badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1a0933;
+  font-size: 12px;
+}
+
+.game-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+/* Active Highlight State (Orange outer ring) */
+.game-card.active .game-icon-wrapper {
+  background: linear-gradient(135deg, #FF8A00, #FF5A1F);
+  box-shadow: 0 8px 20px rgba(255, 90, 31, 0.4);
+  transform: translateY(-5px);
+}
+.game-card.active .game-name {
+  color: var(--primary-color);
+}
+
+/* ==========================================================================
+   5. Core Values Section
+   ========================================================================== */
+.values-section {
+  padding: 40px 20px 80px 20px;
+  background: transparent;
+}
+
+.values-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.position-card,
+.value-card {
+  background-color: #1a0933; /* 导航栏整行全屏：深紫色 */  
+  border-radius: 16px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  background-color: #1a0933; /* 导航栏整行全屏：深紫色 */  
+}
+
+.value-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.value-icon {
+  font-size: 48px;
+}
+
+.value-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.value-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Theme color customizations for each card */
+.v-play .value-title { color: #FF6B6B; }
+.v-connect .value-title { color: #FFD43B; }
+.v-grow .value-title { color: #3bc9db; }
+.v-imagine .value-title { color: #da77f2; }
+.v-achieve .value-title { color: #ffa94d; }
+
+/* Dummy section for anchor/scroll testing */
+.dummy-section {
+  padding: 100px 20px;
+  background: var(--bg-light);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* mobile menu */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  padding: 5px;
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-main);
+  border-radius: 3px;
+  transition: var(--transition);
+}
+
+.life-panel {
+  background-color: #1a0933; /* background color */
+  color: #ffffff;            /* text color */
+}
+
+/* title color */
+.life-panel h2 {  color: #ffffff;}
+
+
+/* ==========================================================================
+   6. Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-container { grid-template-columns: 1fr; padding-bottom: 160px; }
+  .hero-left { max-width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .hero-right { width: 100%; height: 38%; top: auto; bottom: 0; }
+  .artwork-wrapper { position: absolute; left: 0; right: 0; bottom: 0; height: 32%; clip-path: none; border-radius: 30px 30px 0 0;}
+  .character-dog { width: 95%; left: 50%; transform: translateX(-50%); bottom: 0; z-index: 20; }
+  .games-grid { grid-template-columns: repeat(3, 1fr); }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+  .values-grid { grid-template-columns: 1fr; }
+  .wave-separator { height: 80px; }
+
+  .mobile-menu-toggle { display: flex; /* Hanbergor button */  }
+  .social-links {    display: none;   }
+  
+  /* mobile menu, dropdown */
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1a0933;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    gap: 20px;
+  }
+
+  /* .active class, display menu */
+  .nav-menu.active {    display: flex;  }
+}
+
