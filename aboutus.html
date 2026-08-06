@@ -15,6 +15,13 @@
       <a href="index.html#home" class="logo">
         <img src="res/logo_ddg_c2.png" alt="Logo" class="logo-img">
       </a>
+	  
+      <button class="mobile-menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+	  
       <nav>
         <ul class="nav-menu">
           <li class="nav-item" data-section="home"><a href="index.html#home">Home</a></li>
@@ -106,5 +113,14 @@
       </div>
     </section>
   </main>
+
+  <script>
+	// for mobile 
+	function toggleMobileMenu() {
+		const navMenu = document.querySelector('.nav-menu');
+		navMenu.classList.toggle('active');
+	}
+  </script>
+
 </body>
 </html>
