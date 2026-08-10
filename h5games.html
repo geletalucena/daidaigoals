@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H5 Games - DaiDaiGoals</title>
+  <link rel="icon" href="res/logo_title.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* H5 Games 页面专属左右分栏布局 */
+    .h5-main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 20px 60px 20px; /* 顶部留出固定导航栏的空间 */
+      display: flex;
+      gap: 30px;
+      min-height: calc(100vh - 100px);
+    }
+
+    /* 左侧游戏列表样式 */
+    .h5-sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .h5-game-btn {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 18px 20px;
+      color: var(--text-muted, #A0AEC0);
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .h5-game-btn:hover {
+      background-color: rgba(255, 255, 255, 0.07);
+      color: var(--text-main, #FFFFFF);
+      transform: translateX(5px);
+    }
+
+    /* 左侧选中状态 */
+    .h5-game-btn.active {
+      background: linear-gradient(135deg, rgba(255, 138, 0, 0.2), rgba(255, 90, 31, 0.3));
+      border-color: #FF5A1F;
+      color: #FF5A1F;
+      box-shadow: 0 5px 15px rgba(255, 90, 31, 0.2);
+    }
+
+    /* 右侧 H5 游戏显示区域样式 */
+    .h5-display-panel {
+      flex-grow: 1;
+      background-color: #110424;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    /* 内部嵌入的 iframe 游戏画布 */
+    #h5-game-iframe {
+      width: 100%;
+      height: 960px;
+      border: none;
+      background-color: #000;
+    }
+
+    /* 响应式适配：手机和平板端自动上下堆叠 */
+    @media (max-width: 900px) {
+      .h5-main-container {
+        flex-direction: column;
+      }
+      .h5-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      .h5-game-btn {
+        flex-shrink: 0;
+        padding: 12px 20px;
+      }
+      #h5-game-iframe {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header"></header>
+
+  <main class="h5-main-container">
+    
+    <aside class="h5-sidebar">
+      <button class="h5-game-btn active" onclick="switchH5Game(0, this)">
+        <span>Game 1: Backpack Battle</span>
+      </button>
+      <button class="h5-game-btn" onclick="switchH5Game(1, this)">
+        <span>Game 2: Coin Empire</span>
+      </button>
+      <button class="h5-game-btn" onclick="switchH5Game(2, this)">
+        <span>Game 3: Mr Johnny Bullet Blast</span>
+      </button>
+    </aside>
+
+    <section class="h5-display-panel">
+      <iframe id="h5-game-iframe" src="" title="H5 Game Panel"></iframe>
+    </section>
+
+  </main>
+
+  <script>
+    // H5 games list
+    const h5GamesData = [
+      { name: "Game 1", url: "res/h5games/1Backpack Battle/index.html" },
+      { name: "Game 2", url: "res/h5games/2Coin Empire/index.html" },
+      { name: "Game 3", url: "res/h5games/4Mr Johnny Bullet Blast/index.html" }
+    ];
+
+    function switchH5Game(index, element) {
+      // 1. set Active state of buttons
+      const buttons = document.querySelectorAll('.h5-game-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      if (element) {
+        element.classList.add('active');
+      } else if (buttons[index]) {
+        buttons[index].classList.add('active');
+      }
+
+      // 2. refresh game page (iframe)
+      const iframe = document.getElementById('h5-game-iframe');
+      if (h5GamesData[index]) {
+        iframe.src = h5GamesData[index].url;
+      }
+    }
+
+    // default game
+    document.addEventListener("DOMContentLoaded", function() {
+      switchH5Game(0, null);
+    });
+  </script>
+
+  <script src="topmenuloader.js"></script>
+</body>
+</html>

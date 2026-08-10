@@ -10,34 +10,7 @@
 
 <body>
 
-  <header class="site-header">
-    <div class="header-container">
-      <a href="#home" class="logo">
-        <img src="res/logo_ddg_c2.png" alt="Logo" class="logo-img">
-      </a>
-
-      <button class="mobile-menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-	  
-      <nav>
-        <ul class="nav-menu">
-          <li class="nav-item active" data-section="home"><a href="#home">Home</a></li>
-          <li class="nav-item" data-section="about"><a href="aboutus.html">About Us</a></li>
-          <li class="nav-item" data-section="careers"><a href="careers.html">Careers</a></li>
-          <li class="nav-item" data-section="contact"><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="social-links">
-        <!--<a href="#" class="social-icon" style="background:#0077B5;"><img src="res/btn_social_linkedin.png" alt="linkedin"></a>-->
-        <a href="https://x.com/daidaigoals" class="social-icon" style="background:#000000;" target="_blank"><img src="res/btn_social_X_c2.png" alt="X"></a>
-        <!--<a href="https://discord.gg/AvTzrY8w5" class="social-icon" style="background:#5865F2;"><img src="res/btn_social_discord.png" alt="discord"></a>-->
-        <!--<a href="#" class="social-icon" style="background:#E1306C;"><img src="res/btn_social_instagram.png" alt="instagram"></a>-->
-      </div>
-    </div>
-  </header>
+  <header class="site-header"></header>
 
   <section id="home" class="hero-section">
     <div class="hero-container">
@@ -227,13 +200,10 @@
         item.classList.toggle('active', item.getAttribute('data-section') === currentSectionId);
       });
     });
-	
-	// for mobile 
-	function toggleMobileMenu() {
-		const navMenu = document.querySelector('.nav-menu');
-		navMenu.classList.toggle('active');
-	}
-	
+
   </script>
+
+  <script src="topmenuloader.js"></script>
+  
 </body>
 </html>
