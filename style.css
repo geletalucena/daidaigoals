@@ -572,5 +572,25 @@ img {
 
   /* .active class, display menu */
   .nav-menu.active {    display: flex;  }
+
+  .games-grid {
+    flex-wrap: nowrap;
+    gap: 10px;        
+    padding: 10px 5px; 
+    justify-content: space-between; 
+  }
+
+  .game-card {
+    flex: 1;               
+    min-width: 0;          
+  }
+
+  .game-name {
+    font-size: 13px;       
+    white-space: nowrap;   
+    overflow: hidden;      
+    text-overflow: ellipsis; 
+  }
+
 }
 
