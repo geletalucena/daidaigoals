@@ -3,124 +3,239 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DaiDaiGoals About Us</title>
-  <link rel="stylesheet" href="pages/styles.css">
-  <link rel="stylesheet" href="style.css">
+  <title>About Us - DaiDaiGoals</title>
   <link rel="icon" href="res/logo_title.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* About Us 页面专属样式 */
+    .about-main-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 130px 20px 80px 20px; /* 顶部留出固定导航栏的空间 */
+      display: flex;
+      flex-direction: column;
+      gap: 40px; /* 上下两行之间的间距 */
+    }
+
+    /* 第一行：描述信息卡片 */
+    .about-desc-card {
+      background-color: #241142; /* 比大背景稍亮一点的深紫卡片色 */
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .about-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-main, #FFFFFF);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .about-text {
+      font-size: 16px;
+      color: var(--text-muted, #A0AEC0);
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+
+/* Contact 页面专属三行布局样式 */
+    .contact-main-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 130px 20px 80px 20px; /* 顶部留出固定导航栏的空间 */
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* 通用卡片样式（贴合你的深紫风格） */
+    .contact-card {
+      background-color: #241142;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .contact-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main, #FFFFFF);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-text {
+      font-size: 16px;
+      color: var(--text-muted, #A0AEC0);
+      line-height: 1.6;
+    }
+
+    /* 第二行：Get In Touch 专属交互或联系方式排版 */
+    .touch-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .touch-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .touch-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-3px);
+    }
+
+    .touch-item h4 {
+      color: var(--primary-color, #FF5A1F);
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .touch-item p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* 第三行：地图展示区域 */
+    .map-image-wrapper {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #110424;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 15px;
+    }
+
+    .map-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      max-height: 400px;
+    }
+
+    /* 第二行：地图/图片展示区域 */
+    .about-map-card {
+      background-color: #241142;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .map-header-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main, #FFFFFF);
+    }
+
+    .map-image-wrapper {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #110424;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .map-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      max-height: 450px;
+    }
+
+    /* 响应式适配：手机和平板端微调内边距 */
+    @media (max-width: 768px) {
+      .about-desc-card {
+        padding: 25px;
+      }
+      .about-title {
+        font-size: 22px;
+      }
+    }	
+
+  </style>
 </head>
+
 <body>
 
-  <header class="site-header">
-    <div class="header-container">
-      <a href="index.html#home" class="logo">
-        <img src="res/logo_ddg_c2.png" alt="Logo" class="logo-img">
-      </a>
-	  
-      <button class="mobile-menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-	  
-      <nav>
-        <ul class="nav-menu">
-          <li class="nav-item" data-section="home"><a href="index.html#home">Home</a></li>
-          <li class="nav-item active" data-section="about"><a href="aboutus.html">About Us</a></li>
-          <li class="nav-item" data-section="careers"><a href="careers.html">Careers</a></li>
-          <li class="nav-item" data-section="contact"><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="social-links">
-        <a href="https://x.com/daidaigoals" class="social-icon" style="background:#000000;" target="_blank"><img src="res/btn_social_X_c2.png" alt="X"></a>
-        </div>
-    </div>
-  </header>
+  <header class="site-header"></header>
 
-  <main class="standalone-main">
-    <section id="about" class="ddg-section about-section" aria-labelledby="about-title">
-      <div class="section-shell">
-        <div class="hero-panel about-hero">
-          <div class="hero-copy">
-            <h1 id="about-title">
-              <span style="color: #ffffff;">About</span>
-              <span class="brand-gradient">DaiDaiGoals</span>
-            </h1>
-            <div class="accent-line" aria-hidden="true"></div>
-            <p class="hero-kicker" style="color: #ffffff;">Connecting Hearts Through<br>Play and Imagination.</p>
-          </div>
-          <div class="hero-art-wrap about-art-wrap" aria-hidden="true">
-            <img class="hero-art about-art" src="pages/assets/sections/about-hero-art.png" alt="">
-          </div>
-        </div>
+  <main class="about-main-container">
+    
+    <section class="about-desc-card">
+      <h2 class="about-title">
+        <span style="color:#FF5A1F">✦</span> About DaiDaiGoals
+      </h2>
+      <p class="about-text">
+        DaiDaiGoals is an innovative game company dedicated to game development and high-quality art production.
+      </p>
+      <p class="about-text">
+        We strive to create gaming experiences that blend creativity, quality, and immersion. By continuously exploring gameplay innovation, artistic expression, and the integration of technology, we build rich, diverse virtual worlds for players.
+      </p>
+      <p class="about-text">
+        At the same time, we provide professional art outsourcing services to game development teams worldwide—covering concept design, character and environment creation, and game asset development—empowering our partners to realize their creative visions through our high-standard production capabilities.
+      </p>
+      <p class="about-text">
+        We believe that games are more than just a form of entertainment; they are a bridge connecting people with imagination. We look forward to exploring the infinite possibilities of the gaming world together with players and industry partners.
+      </p>
+    </section>
 
-        <div class="intro-grid">
-          <div class="ddg-lockup" aria-label="DDG">
-            <span class="lockup-letter lockup-red">D</span>
-            <span class="lockup-letter lockup-yellow">D</span>
-            <span class="lockup-letter lockup-cyan">G</span>
-          </div>
-          <div class="intro-copy" style="color: #ffffff;">
-            <p><strong>DaiDaiGoals</strong> is a creative entertainment company focused on original game development and global publishing.</p>
-            <p>We create games that inspire imagination, encourage connection, and bring joy to players of all ages.</p>
-          </div>
-          <div class="map-card" aria-hidden="true">
-            <img src="pages/assets/sections/about-map.png" alt="">
-          </div>
+    <section class="contact-card">
+      <h2 class="contact-title"><span style="color:#FF5A1F">✦</span> Get In Touch</h2>
+      <p class="contact-text">
+        We are always open to exciting collaborations, publishing inquiries, and creative partnerships. Whether you are a player with feedback or a developer looking to connect, we would love to hear from you!
+	  </p>
+      
+      <div class="touch-methods">
+        <div class="touch-item">
+          <h4>Email Us</h4>
+          <p><a href="mailto:geletalucena@gmail.com" style="color:var(--text-muted); text-decoration:none;" align="center">@Our Operation Team</a></p>
         </div>
-
-        <div class="belief-grid">
-          <article class="belief-item">
-            <div class="round-icon icon-yellow" aria-hidden="true">OO</div>
-            <p>Guided by our belief that great games can unite people across cultures and borders, we combine creativity, technology, and player-first design to build memorable interactive experiences.</p>
-          </article>
-          <article class="belief-item">
-            <div class="round-icon icon-cyan" aria-hidden="true">&nearr;</div>
-            <p>Our vision is to become a global creator of meaningful play experiences, empowering people to connect, explore, grow, and dream together.</p>
-          </article>
+        <div class="touch-item">
+          <h4>Official X (Twitter)</h4>
+          <p><a href="https://x.com/daidaigoals" target="_blank" style="color:var(--text-muted); text-decoration:none;">@daidaigoals</a></p>
         </div>
-
-        <div class="values-row" aria-label="DaiDaiGoals values">
-          <article class="value-card">
-            <div class="value-icon value-red" aria-hidden="true">&hearts;</div>
-            <h2 style="color: #ff5138">Play</h2>
-            <p style="color: #ffffff;">We create games that inspire imagination and bring joy.</p>
-          </article>
-          <article class="value-card">
-            <div class="value-icon value-yellow" aria-hidden="true">&starf;</div>
-            <h2 style="color: #ffb719">Grow</h2>
-            <p style="color: #ffffff;">We encourage growth, curiosity, and personal development.</p>
-          </article>
-          <article class="value-card">
-            <div class="value-icon value-cyan" aria-hidden="true">&bull;&bull;</div>
-            <h2 style="color: #08b9c7">Connect</h2>
-            <p style="color: #ffffff;">We build experiences that bring people together.</p>
-          </article>
-          <article class="value-card">
-            <div class="value-icon value-blue" aria-hidden="true">&nearr;</div>
-            <h2 style="color: #2268f1">Explore</h2>
-            <p style="color: #ffffff;">We embrace new ideas and explore endless possibilities.</p>
-          </article>
-          <article class="value-card">
-            <div class="value-icon value-purple" aria-hidden="true">&#10022;</div>
-            <h2 style="color: #8a42f5">Dream</h2>
-            <p style="color: #ffffff;">We dream big and create worlds beyond imagination.</p>
-          </article>
+        <div class="touch-item">
+          <h4>Business Hours</h4>
+          <p>Monday - Friday (9:00 - 18:00)</p>
         </div>
-
-        <aside class="bottom-art-banner about-bottom-art" aria-label="Connecting Hearts Through Play and Imagination">
-          <img src="pages/assets/sections/about-bottom-banner.png" alt="Connecting Hearts Through Play and Imagination.">
-        </aside>
       </div>
     </section>
+
+    <section class="about-map-card">
+      <h3 class="map-header-title">Our Location</h3>
+      <div class="map-image-wrapper">
+        <img src="res/company-location.png" alt="Company Location Map">
+      </div>
+    </section>
+
   </main>
 
-  <script>
-	// for mobile 
-	function toggleMobileMenu() {
-		const navMenu = document.querySelector('.nav-menu');
-		navMenu.classList.toggle('active');
-	}
-  </script>
-
+  <script src="topmenuloader.js"></script>
 </body>
 </html>
