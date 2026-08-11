@@ -8,9 +8,42 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="padding-top: 80px">
 
   <header class="site-header"></header>
+
+  <section class="games-section">
+    <h2 class="section-title">
+      <span style="color:#FFB800">✦</span> Our App Games <span style="color:#00C2FF">✦</span>
+    </h2>
+     
+    <div class="games-grid">
+      <button class="game-card active" onclick="switchGame(0, this)">
+        <span class="game-name" style="display: block; margin-bottom: 15px;">Space Hunter</span>
+        <div class="game-icon-wrapper">
+          <img src="res/games/space-hunter-icon-2.jpg" alt="Space Hunter">
+          <span class="badge" style="background:#FF5A1F">🐾</span>
+        </div>
+      </button>
+
+      <button class="game-card" onclick="switchGame(1, this)">
+        <span class="game-name" style="display: block; margin-bottom: 15px;">Legends Of Duck</span>
+        <div class="game-icon-wrapper">
+          <img src="res/games/duck-game-icon.jpg" alt="Legends Of Duck">
+          <span class="badge" style="background:#9D4EDD">⭐</span>
+        </div>
+      </button>
+
+      <button class="game-card" onclick="switchGame(2, this)">
+        <span class="game-name" style="display: block; margin-bottom: 15px;">Mystery Of Nile</span>
+        <div class="game-icon-wrapper">
+          <img src="res/games/MysNile-icon.jpg" alt="Mystery Of Nile">
+          <span class="badge" style="background:#FFBF69">★</span>
+        </div>
+      </button>
+    </div>
+  </section>
+
 
   <section id="home" class="hero-section">
     <div class="hero-container">
@@ -47,37 +80,6 @@
     </div>
   </section>
 
-  <section class="games-section">
-    <h2 class="section-title">
-      <span style="color:#FFB800">✦</span> Our Games <span style="color:#00C2FF">✦</span>
-    </h2>
-     
-    <div class="games-grid">
-      <button class="game-card active" onclick="switchGame(0, this)">
-        <span class="game-name" style="display: block; margin-bottom: 15px;">Space Hunter</span>
-        <div class="game-icon-wrapper">
-          <img src="res/games/space-hunter-icon-2.jpg" alt="Space Hunter">
-          <span class="badge" style="background:#FF5A1F">🐾</span>
-        </div>
-      </button>
-
-      <button class="game-card" onclick="switchGame(1, this)">
-        <span class="game-name" style="display: block; margin-bottom: 15px;">Legends Of Duck</span>
-        <div class="game-icon-wrapper">
-          <img src="res/games/duck-game-icon.jpg" alt="Legends Of Duck">
-          <span class="badge" style="background:#9D4EDD">⭐</span>
-        </div>
-      </button>
-
-      <button class="game-card" onclick="switchGame(2, this)">
-        <span class="game-name" style="display: block; margin-bottom: 15px;">Mystery Of Nile</span>
-        <div class="game-icon-wrapper">
-          <img src="res/games/MysNile-icon.jpg" alt="Mystery Of Nile">
-          <span class="badge" style="background:#FFBF69">★</span>
-        </div>
-      </button>
-    </div>
-  </section>
 
   <script>
     // Mock data source for switching different games

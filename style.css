@@ -105,6 +105,7 @@ img {
 .social-links {
   display: flex;
   gap: 12px;
+  visibility: hidden; /* hide it*/
 }
 
 .social-icon {
@@ -351,6 +352,37 @@ img {
   background: none;
   border: none;
   flex: 0 1 150px;
+}
+
+/* 游戏卡片基础样式（确保有过渡效果） */
+/*
+.game-card {
+  transition: all 0.3s ease;
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}*/
+
+/* 选中的游戏卡片动效 */
+.game-card.active {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* 定义发光和呼吸缩放动画 */
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 184, 0, 0.6));
+  }
+  50% {
+    transform: scale(1.05); /* 稍微放大一点点 */
+    filter: drop-shadow(0 0 12px rgba(255, 184, 0, 0.9)); /* 外发光变亮变大 */
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 184, 0, 0.6));
+  }
 }
 
 .game-icon-wrapper {
